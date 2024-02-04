@@ -14,20 +14,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+final currentDate = Provider<DateTime>(
+  (ref) => DateTime.now(),
+);
+
+class HomePage extends ConsumerWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(currentDate);
     return Scaffold(
-      appBar: AppBar(title: Text('Home Page ')),
+      appBar: AppBar(
+          title: Center(
+        child: Text(
+          'Home Page ',
+        ),
+      )),
     );
   }
 }
